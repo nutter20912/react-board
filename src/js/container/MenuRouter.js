@@ -1,7 +1,7 @@
-import PostList from '../Post/PostList';
-import NewPost from '../Post/PostForm';
+import PostList from '../components/post/PostList';
+import NewPost from '../components/post/PostForm';
 
-const MenuRouter = [
+const menuRouter = [
   {
     title: 'postList',
     path: '/board/postList',
@@ -14,4 +14,4 @@ const MenuRouter = [
   },
 ];
 
-export default MenuRouter;
+export default menuRouter;

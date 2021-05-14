@@ -3,11 +3,9 @@ import {
   Route,
 } from "react-router-dom";
 import { Breadcrumb, Layout } from 'antd';
-import { MenuRouter } from '../default';
 
-const Content = (props) => {
-  console.log(props);
-  const ContentItems = () => MenuRouter.map(
+const Content = ({breadcrumbList, menuRouter}) => {
+  const ContentItems = () => menuRouter.map(
     ({ path, component }, index) => (
       <Route
         key={index}
@@ -21,7 +19,7 @@ const Content = (props) => {
     <Layout.Content style={{ margin: '0 16px' }}>
       <Breadcrumb style={{ margin: '16px 0' }}>
         <Breadcrumb.Item>
-            <span>{props.breadcrumbList}</span>
+          <span>{breadcrumbList}</span>
         </Breadcrumb.Item>
       </Breadcrumb>
       <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
