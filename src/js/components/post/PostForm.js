@@ -3,7 +3,6 @@ import { Form, Input, Button } from 'antd';
 const PostForm = ({
   createPost,
   onFinish,
-  renderConfirm,
 }) => {
   const layout = {
     labelCol: {
@@ -14,22 +13,13 @@ const PostForm = ({
     },
   };
 
-  const tailLayout = {
-    wrapperCol: {
-      offset: 8,
-      span: 16,
-    },
-  };
-
-
-
   return (
     <Form
+      id='addPost'
       {...layout}
       name="basic"
       initialValues={{ remember: true }}
       onFinish={onFinish}
-      render={renderConfirm}
     >
       <Form.Item
         label="title"
@@ -55,12 +45,6 @@ const PostForm = ({
         ]}
       >
         <Input.TextArea rows={4} />
-      </Form.Item>
-
-      <Form.Item {...tailLayout}>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
       </Form.Item>
     </Form>
   );

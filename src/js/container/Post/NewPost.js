@@ -1,22 +1,16 @@
 import PostForm from '../../components/post/PostForm';
-import { Confirm } from '../../components/Confirm';
 import { useState } from 'react';
+import { Modal, Button } from 'antd';
 
 const fakeApi = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-export const NewPost = () => {
-  const [visible, setVisible] = useState(false);
+export const NewPost = ({ visible, setVisible }) => {
+  // const [visible, setVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
 
+  // const [modalText, setModalText] = useState('是否新增文章');
+
   const onFinish = () => {
-    setVisible(true);
-  };
-
-  const handleCancel = () => {
-    setVisible(false);
-  };
-
-  const handleOk = () => {
     setConfirmLoading(true);
 
     createPost().then(() => {
@@ -25,14 +19,9 @@ export const NewPost = () => {
     });
   };
 
-  const renderConfirm = (
-    <Confirm
-      visible={visible}
-      handleOk={handleOk}
-      confirmLoading={confirmLoading}
-      handleCancel={handleCancel}
-    />
-  );
+  const handleCancel = () => {
+    setVisible(false);
+  };
 
   const createPost = async () => {
     await fakeApi(3000);
@@ -41,10 +30,27 @@ export const NewPost = () => {
   };
 
   return (
-    <PostForm
-      createPost={createPost}
-      onFinish={onFinish}
-      renderConfirm={renderConfirm}
-    />
+    <Modal
+      title='new post'
+      visible={visible}
+      confirmLoading={confirmLoading}
+      footer={[
+        <Button onClick={handleCancel}>
+            取消
+        </Button>,
+        <Button
+          form='addPost'
+          htmlType='submit'
+          loading={confirmLoading}
+        >
+            送出
+        </Button>
+        ]}
+    >
+      <PostForm
+        createPost={createPost}
+        onFinish={onFinish}
+      />
+    </Modal>
   );
 }
