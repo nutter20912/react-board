@@ -3,7 +3,6 @@ import {
   Route,
 } from "react-router-dom";
 import { Breadcrumb, Layout } from 'antd';
-import { NewPost } from './Post/NewPost';
 
 const Content = ({breadcrumbList, menuRouter}) => {
   const ContentItems = () => menuRouter.map(

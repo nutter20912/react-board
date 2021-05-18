@@ -1,4 +1,4 @@
-import { Form, Input, Button } from 'antd';
+import { Form, Input } from 'antd';
 
 const PostForm = ({
   createPost,

@@ -1,21 +1,26 @@
 import PostForm from '../../components/post/PostForm';
 import { useState } from 'react';
-import { Modal, Button } from 'antd';
+import { Modal, Button,message, Space } from 'antd';
+import { fakeApi } from '../../utils';
 
-const fakeApi = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-
-export const NewPost = ({ visible, setVisible }) => {
-  // const [visible, setVisible] = useState(false);
+export const NewPost = ({ visible, setVisible, pushPosts }) => {
   const [confirmLoading, setConfirmLoading] = useState(false);
+  const [cancelDisabled, setCancelDisabled] = useState(false);
 
-  // const [modalText, setModalText] = useState('是否新增文章');
+  const success = (msg) => {
+    message.success(msg);
+  };
 
   const onFinish = () => {
     setConfirmLoading(true);
+    setCancelDisabled(true);
 
-    createPost().then(() => {
+    createPost().then((res) => {
+      pushPosts(res);
+
       setVisible(false);
       setConfirmLoading(false);
+      success('新增成功');
     });
   };
 
@@ -24,9 +29,17 @@ export const NewPost = ({ visible, setVisible }) => {
   };
 
   const createPost = async () => {
-    await fakeApi(3000);
-
-    return 'ok';
+    try {
+      return fakeApi(3000, {
+        post_id: 2,
+        name: 'alex',
+        title: 'xxxx',
+        context: 'shit',
+        comments: []
+      });
+    } catch (error) {
+      return 'createPost error';
+    }
   };
 
   return (
@@ -35,7 +48,7 @@ export const NewPost = ({ visible, setVisible }) => {
       visible={visible}
       confirmLoading={confirmLoading}
       footer={[
-        <Button onClick={handleCancel}>
+        <Button onClick={handleCancel} disabled={cancelDisabled}>
             取消
         </Button>,
         <Button
