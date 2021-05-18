@@ -1,33 +1,46 @@
-import { List, Avatar, Button, Skeleton } from 'antd';
+import { List, Avatar, Button, Skeleton, Space } from 'antd';
 import { useState } from 'react';
+import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
 
 export const Posts = ({ data }) => {
-  const [initLoading, setInitLoading] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [list, setList] = useState([]);
+  const IconText = ({ IconComponent, text }) => (
+    <Space>
+      <IconComponent />
+      {text}
+    </Space>
+  );
 
   const renderItem = (item) => (
     <List.Item
-      actions={
-        <Button>編輯</Button>
-      }
+      actions={[
+        <Button>編輯</Button>,
+        <IconText
+          IconComponent={LikeOutlined}
+          text="156"
+        // key="list-vertical-like-o"
+        />,
+        <IconText
+          IconComponent={MessageOutlined}
+          text="0"
+        // key="list-vertical-message"
+        />,
+      ]}
     >
-      <Skeleton avatar title={false} loading={false} active>
+      <Skeleton
+        avatar title={false} loading={false} active
+      >
         <List.Item.Meta
-           title={<p>{item.name}</p>}
-          // description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+          title={<p>{item.name}</p>}
         />
-        <div>content</div>
+        <div>{item.context}</div>
       </Skeleton>
     </List.Item>
   );
 
   return (
     <List
-      className="demo-loadmore-list"
-      // loading={initLoading}
-      // itemLayout="horizontal"
-      // loadMore={loadMore}
+      itemLayout="vertical"
+      size="large"
       dataSource={data}
       renderItem={renderItem}
     />

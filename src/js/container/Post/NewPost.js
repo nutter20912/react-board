@@ -1,6 +1,6 @@
 import PostForm from '../../components/post/PostForm';
 import { useState } from 'react';
-import { Modal, Button,message, Space } from 'antd';
+import { Modal, Button, message, Space } from 'antd';
 import { fakeApi } from '../../utils';
 
 export const NewPost = ({ visible, setVisible, pushPosts }) => {
@@ -30,11 +30,11 @@ export const NewPost = ({ visible, setVisible, pushPosts }) => {
 
   const createPost = async () => {
     try {
-      return fakeApi(3000, {
+      return fakeApi(1000, {
         post_id: 2,
         name: 'alex',
         title: 'xxxx',
-        context: 'shit',
+        context: 'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
         comments: []
       });
     } catch (error) {
@@ -49,16 +49,16 @@ export const NewPost = ({ visible, setVisible, pushPosts }) => {
       confirmLoading={confirmLoading}
       footer={[
         <Button onClick={handleCancel} disabled={cancelDisabled}>
-            取消
+          取消
         </Button>,
         <Button
           form='addPost'
           htmlType='submit'
           loading={confirmLoading}
         >
-            送出
+          送出
         </Button>
-        ]}
+      ]}
     >
       <PostForm
         createPost={createPost}

@@ -21,12 +21,12 @@ export const PostList = () => {
 
   useEffect(() => {
     const getPosts = async () => {
-      const res = await fakeApi(5000, [
+      const res = await fakeApi(100, [
         {
           post_id: 1,
           name: 'paul',
           title: 'asd',
-          context: 'aaaaaa',
+          context: 'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
           comments: [
             {
               comment_id: 1,
@@ -44,6 +44,7 @@ export const PostList = () => {
   }, []);
 
   return (
+    <>
     <PageHeader
       ghost={false}
       title='post list'
@@ -52,17 +53,13 @@ export const PostList = () => {
           新增 post
         </Button>
       }
-    >
-      <Descriptions size="small" column={3}>
-        <Descriptions.Item label="Created">
-          <Posts data={data} />
-        </Descriptions.Item>
-      </Descriptions>
+      />
+      <Posts data={data} />
       <NewPost
         visible={visible}
         setVisible={setVisible}
         pushPosts={pushPosts}
       />
-    </PageHeader>
+    </>
   );
 }
