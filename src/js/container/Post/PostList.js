@@ -1,15 +1,17 @@
 import { Button, PageHeader, Descriptions } from 'antd';
 import { NewPost } from './NewPost';
 import { Posts } from './Posts';
+import { Detail } from './Detail';
 import { useState, useEffect } from 'react';
 import { fakeApi } from '../../utils';
 
 export const PostList = () => {
-  const [visible, setVisible] = useState(false);
+  const [showNewPost, setShowNewPost] = useState(false);
+  const [showPostDetail, setShowPostDetail] = useState(false);
   const [data, setData] = useState([]);
 
   const onClick = () => {
-    setVisible(true);
+    setShowNewPost(true);
   }
 
   const pushPosts = (res) => {
@@ -18,24 +20,23 @@ export const PostList = () => {
     setData(data);
   }
 
-
   useEffect(() => {
     const getPosts = async () => {
-      const res = await fakeApi(100, [
-        {
-          post_id: 1,
-          name: 'paul',
-          title: 'asd',
-          context: 'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-          comments: [
-            {
-              comment_id: 1,
-              name: 'other',
-              context: 'comment 1',
-            }
-          ]
-        }
-      ]);
+      const fakeResult = {
+        post_id: 1,
+        name: 'paul',
+        title: 'asd',
+        context: 'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
+        comments: [
+          {
+            comment_id: 1,
+            name: 'other',
+            context: 'comment 1',
+          }
+        ]
+      }
+
+      const res = await fakeApi(100, new Array(5).fill(fakeResult));
 
       setData(res);
     };
@@ -45,20 +46,27 @@ export const PostList = () => {
 
   return (
     <>
-    <PageHeader
-      ghost={false}
-      title='post list'
-      extra={
-        <Button type="primary" onClick={onClick} >
-          新增 post
-        </Button>
-      }
+      <PageHeader
+        ghost={false}
+        title='post list'
+        extra={
+          <Button type="primary" onClick={onClick} >
+            新增 post
+          </Button>
+        }
       />
-      <Posts data={data} />
+      <Posts
+        data={data}
+        setShowPostDetail={setShowPostDetail}
+      />
       <NewPost
-        visible={visible}
-        setVisible={setVisible}
+        visible={showNewPost}
+        setVisible={setShowNewPost}
         pushPosts={pushPosts}
+      />
+      <Detail
+        visible={showPostDetail}
+        setShowPostDetail={setShowPostDetail}
       />
     </>
   );

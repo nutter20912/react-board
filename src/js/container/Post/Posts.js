@@ -2,23 +2,24 @@ import { List, Avatar, Button, Skeleton, Space } from 'antd';
 import { useState } from 'react';
 import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
 
-export const Posts = ({ data }) => {
+export const Posts = ({ data, setShowPostDetail }) => {
   const IconText = ({ IconComponent, text }) => (
-    <Space>
-      <IconComponent />
+    <Space onClick={()=> setShowPostDetail(true)}>
+      <Button type="link" size='large' icon={<IconComponent />} >
+
       {text}
+      </Button>
     </Space>
   );
 
   const renderItem = (item) => (
     <List.Item
       actions={[
-        <Button>編輯</Button>,
-        <IconText
-          IconComponent={LikeOutlined}
-          text="156"
-        // key="list-vertical-like-o"
-        />,
+         <IconText
+           IconComponent={LikeOutlined}
+           text="156"
+         // key="list-vertical-like-o"
+         />,
         <IconText
           IconComponent={MessageOutlined}
           text="0"
@@ -41,6 +42,10 @@ export const Posts = ({ data }) => {
     <List
       itemLayout="vertical"
       size="large"
+      pagination={{
+        onChange: (page) => {},
+        pageSize: 3,
+      }}
       dataSource={data}
       renderItem={renderItem}
     />
