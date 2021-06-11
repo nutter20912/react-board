@@ -11,15 +11,13 @@ export const PostList = () => {
   const [showNewPost, setShowNewPost] = useState(false);
   const [data, setData] = useState([]);
 
-  const pushPosts = (res) => {
-    data.push(res);
-
-    setData(data);
+  const unshiftPosts = (res) => {
+    setData((data) => [res, ...data]);
   }
 
   const getPosts = async () => {
     const result = await Api.getPosts();
-    setData(result);
+    setData(result.reverse());
   };
 
   useEffect(() => {
@@ -43,7 +41,7 @@ export const PostList = () => {
       <NewPost
         selfVisible={showNewPost}
         setSelfVisible={setShowNewPost}
-        pushPosts={pushPosts}
+        unshiftPosts={unshiftPosts}
       />
     </>
   );

@@ -25,6 +25,7 @@ export function request(type, url, data) {
       })
       .catch((error) => {
         message.error(error.message);
+        reject(error);
       });
   });
 }

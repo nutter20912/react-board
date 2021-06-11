@@ -1,16 +1,13 @@
 import { Button, message, Modal } from 'antd';
 import { useState } from 'react';
-import { useHistory } from "react-router-dom";
 import * as Api from '../../api';
 import PostForm from './PostForm';
 
 /**
  * 新增文章頁面
  */
-export const NewPost = ({ selfVisible, setSelfVisible, pushPosts }) => {
+export const NewPost = ({ selfVisible, setSelfVisible, unshiftPosts }) => {
   const [confirmLoading, setConfirmLoading] = useState(false);
-
-  const history = useHistory();
 
   const handleCancel = () => {
     setSelfVisible(false);
@@ -20,30 +17,27 @@ export const NewPost = ({ selfVisible, setSelfVisible, pushPosts }) => {
     setConfirmLoading(true);
 
     const data = {
-      post_id: 2,
+      "id": 99,
       name: 'alex',
       title: 'xxxx',
       context: 'We supply a series of design principles.',
       comments: []
     };
 
-    createPost(data).then((res) => {
-      pushPosts(res);
-      setSelfVisible(false);
-      setConfirmLoading(false);
-      message.success('新增成功');
-      history.replace('/');
-    });
-  };
+    Api.addPost(data)
+      .then((res) => {
+        unshiftPosts(res);
+        message.success('新增成功');
 
-  const createPost = async (data) => {
-    try {
-      return Api.addPost(data);
-    } catch (error) {
-      return 'createPost error';
-    }
-  };
+        setSelfVisible(false);
+        setConfirmLoading(false);
+      })
+      .catch(() => {
+        setSelfVisible(false);
+        setConfirmLoading(false);
+      });
 
+  };
   return (
     <Modal
       title='new post'
@@ -62,10 +56,7 @@ export const NewPost = ({ selfVisible, setSelfVisible, pushPosts }) => {
         </Button>
       ]}
     >
-      <PostForm
-        createPost={createPost}
-        onFinish={onFinish}
-      />
+      <PostForm onFinish={onFinish}/>
     </Modal>
   );
 }
