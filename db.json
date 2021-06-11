@@ -1,0 +1,60 @@
+{
+  "user": [
+    {
+      "id": 1,
+      "username": "a",
+      "password": "a"
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "name": "paul1",
+      "title": "one",
+      "context": "We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.",
+      "comments": [
+        {
+          "id": 1,
+          "name": "other",
+          "context": "comment 1"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "paul2",
+      "title": "two",
+      "context": "We supply a series of design principles, practical patterns and high quality design resources",
+      "comments": [
+        {
+          "id": 2,
+          "name": "other",
+          "context": "comment 1"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "paul3",
+      "title": "three",
+      "context": "We supply a series of design principles",
+      "comments": []
+    },
+    {
+      "post_id": 2,
+      "name": "alex",
+      "title": "xxxx",
+      "context": "We supply a series of design principles.",
+      "comments": [],
+      "id": 4
+    },
+    {
+      "post_id": 2,
+      "name": "alex",
+      "title": "xxxx",
+      "context": "We supply a series of design principles.",
+      "comments": [],
+      "id": 5
+    }
+  ]
+}

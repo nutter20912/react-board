@@ -1,38 +1,28 @@
-import { Layout } from 'antd';
-import { useState } from 'react';
-import { BrowserRouter } from "react-router-dom";
-import Content from './container/Content';
-import { SideBar } from './container/SideBar';
-import menuRouter from './container/MenuRouter';
-
-const { Header, Footer } = Layout;
+import { BrowserRouter, Route } from "react-router-dom";
+import {Login} from './pages/login';
+import {Admin} from './pages/admin';
+import { memory, storage } from '../js/utils';
 
 
 const App = () => {
-  const [breadcrumbList, setBreadcrumbList] = useState('');
+  memory.user = storage.get('user');
 
-  const onLink = (path) => {
-    setBreadcrumbList(path);
-  };
+  const isLogin = () => {
+    return memory.user && Object.keys(memory.user).length !== 0;
+  }
 
   return (
-    <Layout style={{ minHeight: '100vh' }}>
       <BrowserRouter>
-        <SideBar
-          onLink={onLink}
-          menuRouter={menuRouter}
+        <Route
+          path='/'
+          strict
+          render={(props) => (
+            isLogin()
+              ? <Admin/>
+              : <Login />
+          )}
         />
-
-        <Layout className="site-layout">
-          <Header className="site-layout-background" style={{ padding: 0 }} />
-          <Content
-            breadcrumbList={breadcrumbList}
-            menuRouter={menuRouter}
-          />
-          <Footer style={{ textAlign: 'center' }}>Ant Design ©</Footer>
-        </Layout>
       </BrowserRouter>
-    </Layout>
   );
 }
 

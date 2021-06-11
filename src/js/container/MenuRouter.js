@@ -1,6 +1,8 @@
-import { PostList } from './Post/PostList';
+import { PostList } from '../pages/Post/PostList';
 
-const menuRouter = [
+import { UserOutlined } from '@ant-design/icons';
+
+export const menuRouter = [
   {
     title: 'postList',
     path: '/board/postList',
@@ -8,4 +10,27 @@ const menuRouter = [
   },
 ];
 
-export default menuRouter;//
+export const testRouter = [
+  {
+    subMenuName: 'Board',
+    icon: UserOutlined,
+    items: [
+      {
+        title: 'postList',
+        path: '/board/postList',
+        component: PostList,
+      },
+    ]
+  },
+  // {
+  //   SubMenu: 'Board',
+  //   icon: 'UserOutlined',
+  //   items: [
+  //     {
+  //       title: 'postList',
+  //       path: '/board/postList',
+  //       component: PostList,
+  //     },
+  //   ]
+  // }
+];

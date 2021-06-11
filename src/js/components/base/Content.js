@@ -4,7 +4,7 @@ import {
 } from "react-router-dom";
 import { Breadcrumb, Layout } from 'antd';
 
-const Content = ({breadcrumbList, menuRouter}) => {
+export const Content = ({breadcrumbList, menuRouter}) => {
   const ContentItems = () => menuRouter.map(
     ({ path, component }, index) => (
       <Route
@@ -30,5 +30,3 @@ const Content = ({breadcrumbList, menuRouter}) => {
   </Layout.Content>
   );
 }
-
-export default Content;

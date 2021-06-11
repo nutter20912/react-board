@@ -1,9 +1,6 @@
 import { Form, Input } from 'antd';
 
-const PostForm = ({
-  createPost,
-  onFinish,
-}) => {
+const PostForm = ({ onFinish }) => {
   const layout = {
     labelCol: {
       span: 8,
