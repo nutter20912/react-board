@@ -25,7 +25,7 @@ const HeaderLink = styled(Link)`
   background-color: #2F4F4F
 `
 
-export const SideBar = ({ menuRouter, onLink }) => {
+export const SideBar = ({ menuRouter }) => {
   const [collapsed, setCollapsed] = useState(false);
 
   const onCollapse = (collapsed) => {
@@ -40,7 +40,6 @@ export const SideBar = ({ menuRouter, onLink }) => {
       </HeaderLink>
       <Menu
         menuRouter={menuRouter}
-        onLink={onLink}
       />
     </Sider>
   );

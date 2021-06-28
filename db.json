@@ -6,6 +6,39 @@
       "password": "a"
     }
   ],
+
+
+  "categorys": {
+    "res": [
+      {
+        "id": 1,
+        "name": "電器",
+        "parentId": null
+      },
+      {
+        "id": 2,
+        "name": "材料",
+        "parentId": null
+      }
+    ]
+  },
+  "category": [
+    {
+      "id": 1,
+      "res": [
+        {
+          "id": 3,
+          "name": "風扇"
+        },
+        {
+          "id": 4,
+          "name": "風扇"
+        }
+      ]
+    }
+  ],
+
+
   "posts": [
     {
       "id": 1,
